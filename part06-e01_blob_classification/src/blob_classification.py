@@ -5,9 +5,16 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn import metrics
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
 
 def blob_classification(X, y):
-    return 0.0
+    X_train,X_test,Y_train,Y_test=train_test_split(X,y,random_state=0,train_size=0.75)
+    model=GaussianNB()
+    model.fit(X_train,Y_train)
+    predict=model.predict(X_test)
+    accuracy=accuracy_score(predict,Y_test)
+    return accuracy
 
 def main():
     X,y = datasets.make_blobs(100, 2, centers=2, random_state=2, cluster_std=2.5)
