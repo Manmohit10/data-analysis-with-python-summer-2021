@@ -87,14 +87,16 @@ def get_features_and_labels():
             if contains_valid_chars(e):
                 Elist.append(e)
     F_ar=np.array(Flist)
-    Fin_feature=get_features(F_ar)
     Fin_target=np.zeros((len(Flist),1))
+    Eng_target=np.ones((len(Elist),1))
+    print(Fin_target.shape,Eng_target.shape)
+    combined_target=np.vstack([Fin_target,Eng_target])
+    print(combined_target[0:2])
+    Fin_feature=get_features(F_ar)
     print(Fin_feature[0:5])
     E_ar=np.array(Elist)
     Eng_feature=get_features(E_ar)
-    Eng_target=np.ones((len(Elist),1))
-    combined_feature=np.vstack([F_ar,E_ar])
-    combined_target=np.vstack([Fin_target,Eng_target])
+    combined_feature=np.vstack([Fin_feature,Eng_feature])
     
     return combined_feature,combined_target
 
