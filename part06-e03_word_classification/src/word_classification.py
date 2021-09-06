@@ -37,28 +37,19 @@ def load_english():
     return lines
 
 def get_features(a):
-    alphas=str("abcdefghijklmnopqrstuvwxyzäö-")
-    print(alphas)
-    result=np.zeros((1,29))
-    for word in a:
+    alphas=list("abcdefghijklmnopqrstuvwxyzäö-")
+    result=np.zeros((len(a),29))
+    for w,word in enumerate(a):
         word=word.lower()
-        al_ar=np.zeros((1,29))
         i=0
-        for letter in alphas:            
-            if letter in word:
-                for w in word:
-                    if w==letter:
-                        al_ar[0,i]+=1
-                i=i+1
-                
-            else:
-                i+=1
-        """li=[word]
-        li2=np.array(li).reshape(1,1)
-        row_ar=np.hstack((al_ar))"""
-        result=np.vstack([result,al_ar])
-    result=result[1:,:]
-    print(result.shape)
+        for letter in word:
+            i=alphas.index(letter)
+            result[w,i]+=1
+        """features = np.zeros((len(a), len(alphabet)))
+	    for i, w in enumerate(a):
+		counts = Counter(w)
+		for j, l in enumerate(alphabet):
+			features[i, j] = counts[l]"""
 
     return result
 
